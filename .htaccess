@@ -1,0 +1,10 @@
+#não lista os diretórios da raiz do projeto
+Options -indexes
+
+#liga a reescrita de url
+RewriteEngine on
+
+#regras de rewrite
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ ./index.php?url=$1 [QSA,NC,L]
