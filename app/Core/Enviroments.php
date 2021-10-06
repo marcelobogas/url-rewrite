@@ -21,7 +21,7 @@ class Enviroments
         foreach ($lines as $line) {
             if (getenv('OS') == 'Windows_NT') {
                 /* S.O WINDOWS */
-                putenv($line);
+                putenv(str_replace(' ', '', $line));
             } else {
                 /* S.O LINUX */
                 putenv(trim($line));
