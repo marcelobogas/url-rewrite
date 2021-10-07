@@ -10,9 +10,8 @@ Enviroments::load(__DIR__);
 /* inclui a página inicial */
 $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
 
-/* define os diretórios para verificação de url */
+/* define o diretório para verificação de url */
 $diretorio = 'pages';
-$diretorioActions = 'app/Actions';
 
 /* definição de páginas permitidas */
 $paginasPermitidas = array('404', 'home', 'produto', 'usuario');
@@ -23,7 +22,7 @@ if (substr_count($url, '/') > 0) {
     $url = explode('/', $url);
 
     /* define título da página */
-    define('APP_TITLE', $url);
+    define('APP_TITLE', strtoupper($url[0]));
 
     /* verifica se a página requisitada existe */
     $pg = (file_exists("{$diretorio}/" . $url[0] . '.php')) && in_array($url[0], $paginasPermitidas) ? $url[0] : '404';

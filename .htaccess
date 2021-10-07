@@ -4,7 +4,15 @@ Options -indexes
 #liga a reescrita de url
 RewriteEngine on
 
+<FilesMatch "\.(env|json|lock)$">
+    Order allow,deny
+    Allow from 192.168.0.1
+</FilesMatch>
+
 #regras de rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ ./index.php?url=$1 [QSA,NC,L]
+
+RewriteCond %{QUERY_STRING} "script"
+RewriteRule .* - [F]

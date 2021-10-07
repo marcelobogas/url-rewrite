@@ -26,8 +26,7 @@ class Conexao
             }
             return $connection;
         } catch (PDOException $e) {
-            $mensagem = "Erro na conexão: " . $e->getMessage();
-            throw new Exception($mensagem);
+            throw new Exception($e->getMessage());
         }
     }
 }
