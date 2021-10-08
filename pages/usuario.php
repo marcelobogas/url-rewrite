@@ -9,18 +9,25 @@ include __DIR__ . '/includes/header.php';
 try {
     /* executa a consulta no banco dedados */
     $Conexao = Conexao::getConnection();
-    $query = $Conexao->query("select id, nome, sobrenome from teste");
+    $query = $Conexao->query("select * from pessoas");
     $pessoas = $query->fetchAll();
 
     /* itera os dados da consulta */
     foreach ($pessoas as $dados) {
+
+        /* realiza o tratamento de um campo booleano para string */
+        $status = $dados['ativo'] == 1 ? 'Ativo' : 'Inativo';
+
+        /* monta a linha com as informações */
         $pessoa = "ID: (" . $dados['id'];
-        $pessoa .= ") - Nome: " . $dados['nome'];/*  */
-        $pessoa .= " " . $dados['sobrenome'];
+        $pessoa .= ") - Nome: " . $dados['nome'];
+        $pessoa .= " - " . $status;
+
+        /* imprime o resultado da consulta */
         echo $pessoa . "<hr>";
     }
 
-    //Fecha conexao com o banco de dados
+    //Fecha a conexao com o banco de dados
     unset($Conexao);
 } catch (Exception $e) {
     echo "Erro na conexão: " . $e->getMessage();
