@@ -24,13 +24,15 @@ try {
         $pessoa .= " - " . $status;
 
         /* imprime o resultado da consulta */
-        echo $pessoa . "<hr>";
+        echo '<div class="alert alert-success text-center" role="alert">' . $pessoa . '</div>';
     }
 
     //Fecha a conexao com o banco de dados
     unset($Conexao);
 } catch (Exception $e) {
-    echo "Erro na conexão: " . $e->getMessage();
+
+    /* imprime o erro caso exista */
+    echo '<div class="alert alert-danger text-center" role="alert">' . $e->getMessage() . '</div>';
 }
 
 /* obtém os dados da url e converte em array */
@@ -49,58 +51,53 @@ if (isset($_POST['inputZip'])) {
     /* obtém o nome do estado*/
     $estado = ViaCep::getEstado($cep['uf']);
 }
-
-
 ?>
 
-<div class="p-3">
+<form action="usuario" method="POST" class="row g-3 pt-3">
 
-    <form action="usuario" method="POST" class="row g-3 pt-3">
-
-        <div class="col-md-2">
-            <label for="inputZip" class="form-label">CEP</label>
-            <input type="text" class="form-control form-control-sm" id="inputZip" name="inputZip" value="<?= isset($cep['cep']) ? $cep['cep'] : ''; ?>" maxlength="9" onblur="getValueCep();">
-        </div>
-
-        <div class="col-10 p-4">
-            <button type="submit" class="btn btn-sm btn-primary" id="inputGetCep" name="inputGetCep">Buscar Cep</button>
-        </div>
-
-    </form>
-
-    <div class="row g-3 pb-3">
-
-        <div class="col-8">
-            <label for="inputAddress" class="form-label">Endereço</label>
-            <input type="text" class="form-control form-control-sm" id="inputAddress" value="<?= isset($cep['cep']) ? $cep['logradouro'] : ''; ?>">
-        </div>
-
-        <div class="col-4">
-            <label for="inputAddress2" class="form-label">Complemento</label>
-            <input type="text" class="form-control form-control-sm" id="inputAddress2" value="">
-        </div>
-
-        <div class="col-3">
-            <label for="inputAddress" class="form-label">Número</label>
-            <input type="text" class="form-control form-control-sm" id="inputAddress" value="<?= isset($cep['cep']) ? $cep['complemento'] : ''; ?>">
-        </div>
-
-        <div class="col-5">
-            <label for="inputAddress2" class="form-label">Bairro</label>
-            <input type="text" class="form-control form-control-sm" id="inputAddress2" value="<?= isset($cep['cep']) ? $cep['bairro'] : ''; ?>">
-        </div>
-
-        <div class="col-md-4">
-            <label for="inputCity" class="form-label">Cidade</label>
-            <input type="text" class="form-control form-control-sm" id="inputCity" value="<?= isset($cep['cep']) ? $cep['localidade'] : ''; ?>">
-        </div>
-
-        <div class="col-md-3">
-            <label for="inputCity" class="form-label">Estado</label>
-            <input type="text" class="form-control form-control-sm" id="inputCity" value="<?= isset($cep['cep']) ? $estado : ''; ?>">
-        </div>
-
+    <div class="col-md-2">
+        <label for="inputZip" class="form-label">CEP</label>
+        <input type="text" class="form-control form-control-sm" id="inputZip" name="inputZip" value="<?= isset($cep['cep']) ? $cep['cep'] : ''; ?>" maxlength="9" onblur="getValueCep();">
     </div>
+
+    <div class="col-10 p-4">
+        <button type="submit" class="btn btn-sm btn-primary" id="inputGetCep" name="inputGetCep">Buscar Cep</button>
+    </div>
+
+</form>
+
+<div class="row g-3">
+
+    <div class="col-8 g-3">
+        <label for="inputAddress" class="form-label">Endereço</label>
+        <input type="text" class="form-control form-control-sm" id="inputAddress" value="<?= isset($cep['cep']) ? $cep['logradouro'] : ''; ?>">
+    </div>
+
+    <div class="col-4 g-3">
+        <label for="inputAddress2" class="form-label">Complemento</label>
+        <input type="text" class="form-control form-control-sm" id="inputAddress2" value="">
+    </div>
+
+    <div class="col-3 g-3">
+        <label for="inputAddress" class="form-label">Número</label>
+        <input type="text" class="form-control form-control-sm" id="inputAddress" value="<?= isset($cep['cep']) ? $cep['complemento'] : ''; ?>">
+    </div>
+
+    <div class="col-5 g-3">
+        <label for="inputAddress2" class="form-label">Bairro</label>
+        <input type="text" class="form-control form-control-sm" id="inputAddress2" value="<?= isset($cep['cep']) ? $cep['bairro'] : ''; ?>">
+    </div>
+
+    <div class="col-md-4 g-3">
+        <label for="inputCity" class="form-label">Cidade</label>
+        <input type="text" class="form-control form-control-sm" id="inputCity" value="<?= isset($cep['cep']) ? $cep['localidade'] : ''; ?>">
+    </div>
+
+    <div class="col-md-3 g-3">
+        <label for="inputCity" class="form-label">Estado</label>
+        <input type="text" class="form-control form-control-sm" id="inputCity" value="<?= isset($cep['cep']) ? $estado : ''; ?>">
+    </div>
+
 </div>
 
 <script type="text/javascript">
