@@ -12,7 +12,7 @@ RewriteEngine on
 #regras de rewrite
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ ./index.php?url=$1 [QSA,NC,L]
+RewriteRule ^(.*)$ ./index.php?url=$1 [QSA,NC]
 
 RewriteCond %{QUERY_STRING} "script"
 RewriteRule .* - [F]

@@ -5,7 +5,7 @@ use App\Core\Enviroments;
 require __DIR__ . '/vendor/autoload.php';
 
 /* carrega as variáveis de ambiente para o projeto */
-Enviroments::load(__DIR__);
+Enviroments::load(__DIR__ . DIRECTORY_SEPARATOR . 'config');
 
 /* inclui a página inicial */
 $url = (isset($_GET['url'])) ? $_GET['url'] : 'home';
